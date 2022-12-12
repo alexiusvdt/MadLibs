@@ -1,37 +1,24 @@
-using FriendLetter.Models;
+using MadLib.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FriendLetter.Controllers
+namespace MadLib.Controllers
 {
   public class HomeController : Controller
   {
 
-    [Route("/hello")]
-    public string Hello() { return "Hello friend!"; }
-
-    [Route("/goodbye")]
-    public string Goodbye() { return "Goodbye friend."; }
+    [Route("/result")]
+    public ActionResult Result(string noun, string adjective, string verb) 
+    {
+      Story userStory = new Story();
+      userStory.Noun = noun;
+      userStory.Adjective = adjective;
+      userStory.Verb = verb;
+      return View(userStory);
+    }
 
     [Route("/")]
-    public ActionResult Letter() 
-    {
-      LetterVariable myLetterVariable = new LetterVariable();
-      myLetterVariable.Recipient = "Lina";
-      myLetterVariable.Sender = "Jasmine";
-      return View(myLetterVariable);
-    }
 
-    [Route("/form")]
-    public ActionResult Form() { return View(); }
-
-    [Route("/postcard")]
-    public ActionResult Postcard(string recipient, string sender)
-    {
-      LetterVariable myLetterVariables = new LetterVariable();
-      myLetterVariables.Recipient = recipient;
-      myLetterVariables.Sender = sender;
-      return View(myLetterVariables);
-    }
+    public ActionResult Form () { return View();}
 
   }
 }
